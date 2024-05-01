@@ -38,11 +38,16 @@ export const App = () => {
   }
 
   function rollDice() {
-    setDice((oldDice) =>
-      oldDice.map((die) => {
-        return die.isHeld ? die : generateNewDie();
-      })
-    );
+    if (!tenzies) {
+      setDice((oldDice) =>
+        oldDice.map((die) => {
+          return die.isHeld ? die : generateNewDie();
+        })
+      );
+    } else {
+      setTenzies(false);
+      setDice(allNewDice());
+    }
   }
   function holdDice(id) {
     setDice((oldDice) =>
@@ -73,7 +78,6 @@ export const App = () => {
       <button type="button" className="roll-button" onClick={rollDice}>
         {tenzies ? "New Game" : "Roll"}
       </button>
-
       {tenzies && <Confetti width={width} height={height} />}
     </main>
   );
