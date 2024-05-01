@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Die } from "./Die";
 import { nanoid } from "nanoid";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
 
 export const App = () => {
+  const { width, height } = useWindowSize();
+
   const [dice, setDice] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
+
+  useEffect(() => {
+    const allHeld = dice.every((die) => die.isHeld);
+    const firstValue = dice[0].value;
+    const allSameValue = dice.every((die) => die.value === firstValue);
+    if (allHeld && allSameValue) {
+      setTenzies(true);
+      console.log("You won!");
+    }
+  }, [dice]);
 
   function generateNewDie() {
     return {
@@ -16,7 +31,7 @@ export const App = () => {
   function allNewDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
-      generateNewDie();
+      newDice.push(generateNewDie());
     }
     console.log(newDice);
     return newDice;
@@ -54,9 +69,12 @@ export const App = () => {
         current value between rolls.
       </p>
       <div className="dice-container">{diceElements}</div>
+
       <button type="button" className="roll-button" onClick={rollDice}>
-        Roll
+        {tenzies ? "New Game" : "Roll"}
       </button>
+
+      {tenzies && <Confetti width={width} height={height} />}
     </main>
   );
 };
