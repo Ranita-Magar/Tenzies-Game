@@ -7,6 +7,7 @@ body {
     padding: 150px;
     padding-left: 24%;
     margin: 0;
+    font-family: ' Karla', sans-serif;
 }
 
 main {
@@ -18,7 +19,7 @@ main {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -42,4 +43,25 @@ main {
 
 .die-num {
     font-size: 2rem;
+}
+
+.roll-button {
+    width: 92.16px;
+    height: 35.84px;
+    font-family: ' Karla', sans-serif;
+    font-size: 16.38px;
+    font-weight: 700;
+    color: white;
+    line-height: 19.15px;
+    background-color: #5035FF;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.roll-button:focus {
+    outline: none;
+}
+
+.roll-button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
